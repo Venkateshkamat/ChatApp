@@ -22,6 +22,14 @@ app.use(cors({
 app.use("/api/auth", authRoutes)
 app.use("/api/message", messageRoutes)
 
+app.use((err,req,res,next)=>{
+    if(err){
+        res.status(500).json({
+            msg:"Caught by global catch",
+            err:err
+        })
+    }
+})
 
 app.listen(PORT,()=>{
     console.log("server is running on PORT:" +PORT);
