@@ -8,6 +8,7 @@ export const useAuthStore = create((set)=>({
     isLogginIn:false,
     isUpdatingProfile:false,
     isCheckingAuth:true,
+    onlineUsers:[],
     checkAuth: async()=>{
         try {
             const res = await axiosInstance.get("/auth/check")
