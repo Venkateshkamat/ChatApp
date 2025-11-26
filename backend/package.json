@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --env=node"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --env=node --runInBand"
   },
   "keywords": [],
   "author": "",
