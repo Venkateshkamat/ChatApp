@@ -10,5 +10,10 @@ export default {
       useESM: true,
     }],
   },
-  testMatch: ['**/__tests__/**/*.test.ts', '**/?(*.)+(spec|test).ts'],
+  testMatch: [
+    '**/__tests__/**/*.test.ts',
+    '**/__tests__/**/*.test.js',
+    '**/?(*.)+(spec|test).ts',
+    '**/?(*.)+(spec|test).js'
+  ],
 };

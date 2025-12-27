@@ -28,4 +28,7 @@ todo.txt
 
 dist/
 *.js.map
+*.ts.map
 *.d.ts
+
+.cursor
