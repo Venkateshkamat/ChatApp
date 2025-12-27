@@ -25,3 +25,7 @@ dist-ssr
 .env
 
 todo.txt
+
+dist/
+*.js.map
+*.d.ts
