@@ -11,9 +11,7 @@ export default {
     }],
   },
   testMatch: [
-    '**/__tests__/**/*.test.ts',
-    '**/__tests__/**/*.test.js',
-    '**/?(*.)+(spec|test).ts',
-    '**/?(*.)+(spec|test).js'
+    '**/src/__tests__/**/*.test.ts',
+    '**/src/__tests__/**/*.test.js',
   ],
 };
