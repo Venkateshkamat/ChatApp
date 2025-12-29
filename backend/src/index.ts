@@ -9,6 +9,11 @@ import { connectDB } from "./lib/db.js";
 import { app, server } from "./lib/socket.js";
 import type { Request, Response, NextFunction } from "express";
 import { healthCheck } from "./controllers/health.controller.js";
+import {
+  authRateLimiter,
+  generalRateLimiter,
+  messageRateLimiter,
+} from "./middleware/rateLimiter.middleware.js";
 
 config();
 
@@ -28,6 +33,11 @@ app.use(
     credentials: true,
   })
 );
+
+//rate limiter
+app.use("/api", generalRateLimiter);
+app.use("/api/message", messageRateLimiter);
+app.use("/health", generalRateLimiter);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
