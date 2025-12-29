@@ -15,7 +15,7 @@ const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
 
   return (
-    <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
+    <div className="container mx-auto px-4 pt-20 pb-8 max-w-5xl min-h-[calc(100vh-4rem)]">
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>
@@ -73,7 +73,7 @@ const SettingsPage = () => {
                 </div>
 
                 {/* Chat Messages */}
-                <div className="p-4 space-y-4 min-h-[200px] max-h-[200px] overflow-y-auto bg-base-100">
+                <div className="p-4 space-y-4 min-h-[200px] max-h-[300px] overflow-y-auto bg-base-100">
                   {PREVIEW_MESSAGES.map((message) => (
                     <div
                       key={message.id}

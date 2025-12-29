@@ -69,7 +69,7 @@ const LoginPage = () => {
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full pl-10`}
+                  className={`input input-bordered w-full pl-10 pr-10`}
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) =>
@@ -78,7 +78,7 @@ const LoginPage = () => {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center z-10"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (

@@ -11,6 +11,7 @@ import { useThemeStore } from "./store/useThemeStore";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 import NotFoundPage from "./pages/NotFoundPage";
+import Footer from "./components/Footer";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <div data-theme={theme}>
       <Navbar />
+      <main className="flex-1">
       <Routes>
         <Route
           path="/"
@@ -52,7 +54,8 @@ const App = () => {
         />
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
-
+      </main>
+      <Footer/>
       <Toaster />
     </div>
   );
