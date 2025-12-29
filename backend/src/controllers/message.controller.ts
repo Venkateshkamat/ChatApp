@@ -6,7 +6,12 @@ import type { Request, Response } from "express";
 import type { IUser } from "../models/user.model.js";
 import type { Types } from "mongoose";
 
-interface AuthRequest<P={},ResBody={},ReqBody={},ReqQuery={}> extends Request<P, ResBody, ReqBody, ReqQuery> {
+interface AuthRequest<
+  P = {},
+  ResBody = {},
+  ReqBody = {},
+  ReqQuery = {},
+> extends Request<P, ResBody, ReqBody, ReqQuery> {
   user?: IUser;
 }
 
@@ -52,10 +57,9 @@ export const getMessages = async (
   res: Response
 ): Promise<void> => {
   try {
-
-    if(!req.user) {
-        res.status(401).json({error: "Unauthorized"});
-        return;
+    if (!req.user) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
     }
 
     const { id: userToChatId } = req.params;
@@ -79,14 +83,14 @@ export const getMessages = async (
 };
 
 export const sendMessage = async (
-  req: AuthRequest<SendMessageParams, {},SendMessageBody>,
+  req: AuthRequest<SendMessageParams, {}, SendMessageBody>,
   res: Response
 ): Promise<void> => {
   try {
-if (!req.user){
-    res.status(401).json({error: "Unauthorized"});
-    return;
-}
+    if (!req.user) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
+    }
 
     const { text, image } = req.body;
     const { id: receiverId } = req.params;

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import type { Response } from "express";
 import type { Types } from "mongoose";
 
-import {config} from "dotenv"
+import { config } from "dotenv";
 
 config();
 

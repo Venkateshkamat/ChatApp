@@ -37,8 +37,8 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowImportingTsExtensions": false,
-    "allowJs": true,
+    "allowJs": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.js"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.js"]
 }
