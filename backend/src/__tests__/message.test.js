@@ -2,7 +2,11 @@ import request from "supertest";
 import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import { getUsersForSidebar, getMessages, sendMessage } from "../controllers/message.controller.js";
+import {
+  getUsersForSidebar,
+  getMessages,
+  sendMessage,
+} from "../controllers/message.controller.js";
 import { signup } from "../controllers/auth.controller.js";
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
@@ -83,14 +87,14 @@ describe("Message Controller: Integration Tests", () => {
       expect(res.statusCode).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
       expect(res.body.length).toBe(2); // Bob and Charlie, not Alice
-      
+
       // Should not include password
-      res.body.forEach(user => {
+      res.body.forEach((user) => {
         expect(user.password).toBeUndefined();
       });
 
       // Should not include the logged in user
-      const userIds = res.body.map(u => u._id);
+      const userIds = res.body.map((u) => u._id);
       expect(userIds).not.toContain(user1Id);
     });
 
@@ -216,14 +220,15 @@ describe("Message Controller: Integration Tests", () => {
 
     it("should send a message with text and image", async () => {
       // Mock base64 image (small test image)
-      const base64Image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+      const base64Image =
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
       const res = await request(app)
         .post(`/api/message/send/${user2Id}`)
         .set("Cookie", user1Cookie)
-        .send({ 
+        .send({
           text: "Check this out!",
-          image: base64Image 
+          image: base64Image,
         });
 
       expect(res.statusCode).toBe(201);
@@ -233,7 +238,8 @@ describe("Message Controller: Integration Tests", () => {
     });
 
     it("should send a message with only image (no text)", async () => {
-      const base64Image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+      const base64Image =
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
       const res = await request(app)
         .post(`/api/message/send/${user2Id}`)
@@ -245,14 +251,15 @@ describe("Message Controller: Integration Tests", () => {
     });
 
     it("should allow sending empty text with image", async () => {
-      const base64Image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+      const base64Image =
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
       const res = await request(app)
         .post(`/api/message/send/${user2Id}`)
         .set("Cookie", user1Cookie)
-        .send({ 
+        .send({
           text: "",
-          image: base64Image 
+          image: base64Image,
         });
 
       expect(res.statusCode).toBe(201);

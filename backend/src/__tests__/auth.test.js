@@ -1,7 +1,12 @@
 import request from "supertest";
 import express from "express";
 import mongoose from "mongoose";
-import { signup, login, logout, checkAuth } from "../controllers/auth.controller.js";
+import {
+  signup,
+  login,
+  logout,
+  checkAuth,
+} from "../controllers/auth.controller.js";
 import User from "../models/user.model.js";
 import cookieParser from "cookie-parser";
 import { protectRoute } from "../middleware/auth.middleware.js"; // Adjust path as needed
@@ -16,7 +21,6 @@ app.get("/api/auth/check", protectRoute, checkAuth);
 
 // Test database connection
 const TEST_DB_URI = process.env.TEST_MONGODB_URI;
-
 
 describe("Auth Controller: Integration Tests", () => {
   beforeAll(async () => {
@@ -39,7 +43,7 @@ describe("Auth Controller: Integration Tests", () => {
   describe("POST /api/auth/signup", () => {
     it("should return 400 if fields are missing", async () => {
       const res = await request(app).post("/api/auth/signup").send({});
-      
+
       expect(res.statusCode).toBe(400);
       expect(res.body.message).toBe("All fields are required");
     });
@@ -47,9 +51,9 @@ describe("Auth Controller: Integration Tests", () => {
     it("should return 400 if only some fields are provided", async () => {
       const res = await request(app).post("/api/auth/signup").send({
         email: "john@example.com",
-        password: "123456"
+        password: "123456",
       });
-      
+
       expect(res.statusCode).toBe(400);
       expect(res.body.message).toBe("All fields are required");
     });
@@ -60,7 +64,7 @@ describe("Auth Controller: Integration Tests", () => {
         email: "john@example.com",
         password: "123",
       });
-      
+
       expect(res.statusCode).toBe(400);
       expect(res.body.message).toBe("Password must be atleast 6 characters");
     });
@@ -101,7 +105,7 @@ describe("Auth Controller: Integration Tests", () => {
 
     it("should hash the password before saving", async () => {
       const plainPassword = "123456";
-      
+
       await request(app).post("/api/auth/signup").send({
         fullName: "Jane Doe",
         email: "jane@example.com",
@@ -109,7 +113,7 @@ describe("Auth Controller: Integration Tests", () => {
       });
 
       const user = await User.findOne({ email: "jane@example.com" });
-      
+
       expect(user.password).not.toBe(plainPassword);
       expect(user.password.length).toBeGreaterThan(20);
     });
@@ -188,7 +192,7 @@ describe("Auth Controller: Integration Tests", () => {
 
       expect(res.statusCode).toBe(200);
       expect(res.body.message).toBe("Logged out succesfully");
-      
+
       const cookie = res.headers["set-cookie"][0];
       expect(cookie).toContain("jwt=;");
       expect(cookie).toContain("Max-Age=0");
