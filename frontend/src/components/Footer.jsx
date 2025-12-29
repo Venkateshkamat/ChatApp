@@ -4,7 +4,7 @@ const Footer = () => {
   // Update these with your actual links
   const githubUrl = "https://github.com/Venkateshkamat/ChatApp";
   const linkedinUrl = "https://www.linkedin.com/in/venkateshkamat/";
-  const email = "mailto:venkatesh.kamat07@gmail.com"; 
+  const email = "mailto:venkatesh.kamat07@gmail.com";
 
   return (
     <footer className="bg-base-100 border-t border-base-300 mt-auto">
