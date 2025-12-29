@@ -30,9 +30,11 @@
 ### Backend
 
 - **Node.js** + **Express.js** – RESTful API backend
+- **Typescript** - Type Safety
 - **Socket.IO** – Real-time WebSocket communication
 - **MongoDB** – NoSQL database for storing users and messages
 - **Cloudinary** – Image upload and storage
+- **API Rate Limits** - Rate limit for security purposes
 - **Render** – PaaS that redeploys on every Git commit
 
 ### Development & Tools
