@@ -6,7 +6,8 @@
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix backend && npm run build --prefix frontend",
     "start": "npm run start --prefix backend",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "test:backend": "npm run test --prefix backend"
   },
   "keywords": [],
   "author": "",

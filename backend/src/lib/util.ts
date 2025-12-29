@@ -10,7 +10,11 @@ export const generateToken = (
   userId: string | Types.ObjectId,
   res: Response
 ): string => {
-  const token: string = jwt.sign({ userId }, process.env.JWT_SECRET, {
+  const jwtSecret = process.env.JWT_SECRET;
+  if (!jwtSecret) {
+    throw new Error("Jwt secret not set in environment");
+  }
+  const token: string = jwt.sign({ userId }, jwtSecret, {
     expiresIn: "7d",
   });
 

@@ -17,9 +17,14 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
+
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"].filter(
+  (origin): origin is string => origin !== undefined
+);
+
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL, "http://localhost:5173"],
+    origin: allowedOrigins.length > 0 ? allowedOrigins : true,
     credentials: true,
   })
 );
