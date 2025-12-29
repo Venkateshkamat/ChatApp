@@ -26,7 +26,7 @@ const App = () => {
   useEffect(() => {
     const trackPageView = () => {
       if (typeof window.gtag !== "undefined") {
-        window.gtag("config", "G-XMN3FGXRXG", {
+        window.gtag("config", "G-X2YNYXLFJW", {
           page_path: location.pathname + location.search,
         });
       } else {
