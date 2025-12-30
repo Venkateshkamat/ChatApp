@@ -17,6 +17,8 @@ import {
 
 config();
 
+app.set("trust proxy", true);
+
 const PORT = process.env.PORT!;
 const __dirname = path.resolve();
 

@@ -21,6 +21,9 @@ export const useAuthStore = create((set, get) => ({
 
       get().connectSocket();
     } catch (error) {
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
       console.log("Error in checkAuth", error.message);
       set({ authUser: null });
     } finally {
@@ -36,7 +39,9 @@ export const useAuthStore = create((set, get) => ({
       toast.success("Account created successfully");
       get().connectSocket();
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
       console.log("Error in signup in useAuthStore");
     } finally {
       set({ isSigningUp: false });
@@ -52,7 +57,9 @@ export const useAuthStore = create((set, get) => ({
 
       get().connectSocket();
     } catch (error) {
-      toast.error("Something went wrong, please try again");
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
       console.log(error.response.data.message);
     } finally {
       set({ isLogginIn: false });
@@ -67,7 +74,9 @@ export const useAuthStore = create((set, get) => ({
 
       get().disconnectSocket();
     } catch (error) {
-      toast.error("Something went wrong");
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
       console.log(error.response.data.message);
     }
   },
@@ -79,7 +88,9 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: res.data });
       toast.success("Profile updated successfully");
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
       console.log("error in updateProfile in AuthStore", error);
     } finally {
       set({ isUpdatingProfile: false });
