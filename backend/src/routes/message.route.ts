@@ -6,10 +6,26 @@ import {
   sendMessage,
 } from "../controllers/message.controller.js";
 
+import { validate } from "../middleware/validate.middleware.js";
+import {
+  sendMessageSchema,
+  getMessagesSchema,
+} from "../schemas/message.schema.js";
+
 const router = express.Router();
 
 router.get("/users", protectRoute, getUsersForSidebar);
-router.get("/:id", protectRoute, getMessages as any);
-router.post("/send/:id", protectRoute, sendMessage as any);
+router.get(
+  "/:id",
+  protectRoute,
+  validate(getMessagesSchema),
+  getMessages as any
+);
+router.post(
+  "/send/:id",
+  protectRoute,
+  validate(sendMessageSchema),
+  sendMessage as any
+);
 
 export default router;
