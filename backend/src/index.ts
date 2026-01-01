@@ -37,7 +37,6 @@ app.use(
 //rate limiter
 app.use("/api", generalRateLimiter);
 app.use("/api/message", messageRateLimiter);
-app.use("/health", generalRateLimiter);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
