@@ -16,8 +16,9 @@ import {
 } from "./middleware/rateLimiter.middleware.js";
 
 config();
-
-app.set("trust proxy", true);
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", true);
+}
 
 const PORT = process.env.PORT!;
 const __dirname = path.resolve();

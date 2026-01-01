@@ -11,10 +11,7 @@ import User from "../models/user.model.js";
 import cookieParser from "cookie-parser";
 import { protectRoute } from "../middleware/auth.middleware.js";
 import { validate } from "../middleware/validate.middleware.js";
-import {
-  signupSchema,
-  loginSchema,
-} from "../schemas/auth.schema.js";
+import { signupSchema, loginSchema } from "../schemas/auth.schema.js";
 
 const app = express();
 app.use(express.json());
@@ -58,7 +55,6 @@ describe("Auth Controller: Integration Tests", () => {
       expect(errorFields).toContain("body.fullName");
       expect(errorFields).toContain("body.email");
       expect(errorFields).toContain("body.password");
-
     });
 
     it("should return 400 if only some fields are provided", async () => {
@@ -69,7 +65,7 @@ describe("Auth Controller: Integration Tests", () => {
 
       expect(res.statusCode).toBe(400);
       expect(res.body.message).toBe("Validation Error");
-      expect(res.body.errors).toBeDefined()
+      expect(res.body.errors).toBeDefined();
 
       const errorFields = res.body.errors.map((e) => e.field);
       expect(errorFields).toContain("body.fullName");
@@ -86,7 +82,9 @@ describe("Auth Controller: Integration Tests", () => {
       expect(res.body.message).toBe("Validation Error");
       expect(res.body.errors).toBeDefined();
 
-      const passwordError = res.body.errors.find((e) => e.field==="body.password");
+      const passwordError = res.body.errors.find(
+        (e) => e.field === "body.password"
+      );
       expect(passwordError).toBeDefined();
       expect(passwordError.message).toContain("6 characters");
     });
