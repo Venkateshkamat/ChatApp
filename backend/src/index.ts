@@ -1,4 +1,5 @@
 import express from "express";
+import { pinoHttp } from "pino-http";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import cors from "cors";
@@ -23,6 +24,11 @@ if (process.env.NODE_ENV === "production") {
 const PORT = process.env.PORT!;
 const __dirname = path.resolve();
 
+const logger = pinoHttp({
+  level: process.env.NODE_ENV === "production" ? "warn" : "info",
+});
+
+app.use(logger);
 app.use(express.json());
 app.use(cookieParser());
 
