@@ -30,17 +30,6 @@ export const signup = async (
 ): Promise<void> => {
   const { fullName, email, password } = req.body;
   try {
-    if (!fullName || !email || !password) {
-      res.status(400).json({ message: "All fields are required" });
-      return;
-    }
-    if (password.length < 6) {
-      res
-        .status(400)
-        .json({ message: "Password must be atleast 6 characters" });
-      return;
-    }
-
     const user = await User.findOne({ email });
 
     if (user) {
@@ -136,10 +125,6 @@ export const updateProfile = async (
     }
 
     const userId = req.user._id;
-    if (!profilePic) {
-      res.status(400).json({ message: "Profile pic is missing" });
-      return;
-    }
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
 

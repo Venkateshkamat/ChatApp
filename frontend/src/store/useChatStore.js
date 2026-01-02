@@ -16,7 +16,10 @@ export const useChatStore = create((set, get) => ({
       const res = await axiosInstance.get("/message/users");
       set({ users: res.data });
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
+      console.log(error.response.data.message);
     } finally {
       set({ isUsersLoading: false });
     }
@@ -28,7 +31,10 @@ export const useChatStore = create((set, get) => ({
       const res = await axiosInstance.get(`/message/${userId}`);
       set({ messages: res.data });
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
+      console.log(error.response.data.message);
     } finally {
       set({ isMessagesLoading: false });
     }
@@ -42,7 +48,10 @@ export const useChatStore = create((set, get) => ({
       );
       set({ messages: [...messages, res.data] });
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response?.status !== 429) {
+        toast.error("Something went wrong, please try again");
+      }
+      console.log(error.response.data.message);
     }
   },
 
