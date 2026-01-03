@@ -1,11 +1,12 @@
 import express from "express";
 import { pinoHttp } from "pino-http";
-import authRoutes from "./routes/auth.route.js";
-import messageRoutes from "./routes/message.route.js";
+import swaggerUi from "swagger-ui-express";
 import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
+import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import { app, server } from "./lib/socket.js";
 import type { Request, Response, NextFunction } from "express";
@@ -15,6 +16,7 @@ import {
   generalRateLimiter,
   messageRateLimiter,
 } from "./middleware/rateLimiter.middleware.js";
+import swaggerDefinition from "./swagger.js";
 
 config();
 if (process.env.NODE_ENV === "production") {
@@ -28,6 +30,7 @@ const logger = pinoHttp({
   level: process.env.NODE_ENV === "production" ? "warn" : "info",
 });
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
 app.use(logger);
 app.use(express.json());
 app.use(cookieParser());

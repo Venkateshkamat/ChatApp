@@ -26,6 +26,7 @@
     "mongoose": "^8.15.0",
     "pino-http": "^11.0.0",
     "socket.io": "^4.8.1",
+    "swagger-ui-express": "^5.0.1",
     "zod": "^4.2.1"
   },
   "devDependencies": {
@@ -38,6 +39,7 @@
     "@types/mongoose": "^5.11.96",
     "@types/node": "^25.0.3",
     "@types/supertest": "^6.0.3",
+    "@types/swagger-ui-express": "^4.1.8",
     "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "^8.50.1",
     "@typescript-eslint/parser": "^8.50.1",
