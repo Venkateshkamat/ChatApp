@@ -10,7 +10,7 @@ const swaggerDefinition = {
     {
       url:
         process.env.NODE_ENV === "production"
-          ? process.env.API_URL || "https://your-api-url.com"
+          ? process.env.API_URL || "https://chatapp-xlyo.onrender.com/"
           : "http://localhost:5001",
       description:
         process.env.NODE_ENV === "production"

@@ -3,6 +3,13 @@
 **ChatApp** is a real-time chatting application built with the MERN stack and powered by `socket.io` to enable real-time messaging between users. It supports user authentication, dynamic conversations, image uploads, and responsive design — all packed into a full-stack modern web app.
 
 ---
+## Status
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/venkateshkamat/chatapp/test.yml?label=test&labelColor=black)
+![Render Deploy Status](https://img.shields.io/badge/render-live-brightgreen?labelColor=black)
+
+
+---
 
 ## 🚀 Features
 

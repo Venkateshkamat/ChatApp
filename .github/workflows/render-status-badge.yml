@@ -1,0 +1,60 @@
+name: Update Render Deploy Status Badge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-badge:
+    runs-on: ubuntu-latest
+
+    env:
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+      README_FILE: README.md
+      BADGE_IDENTIFIER: "Render Deploy Status"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # -------- Check: 3 minutes after push --------
+      - name: Wait 3 minutes
+        run: sleep 180
+
+      - name: Update badge (3 min)
+        run: |
+          # Fetch latest deploy status
+          RAW_RESPONSE=$(curl -s -H "Authorization: Bearer $RENDER_API_KEY" \
+            "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys")
+
+
+          STATUS=$(echo "$RAW_RESPONSE" | jq -r '.[0].deploy.status // empty')
+          if [ -z "$STATUS" ]; then
+            STATUS="unknown"
+          fi
+
+          if [ "$STATUS" = "live" ]; then
+            BADGE="https://img.shields.io/badge/render-live-brightgreen?labelColor=black"
+          elif [ "$STATUS" = "build_failed" ] || [ "$STATUS" = "deploy_failed" ]; then
+            BADGE="https://img.shields.io/badge/render-failed-red?labelColor=black"
+          elif [ "$STATUS" = "deploying" ] || [ "$STATUS" = "building" ]; then
+            BADGE="https://img.shields.io/badge/render-deploying-yellow?labelColor=black"
+          else
+            BADGE="https://img.shields.io/badge/render-unknown-lightgrey?labelColor=black"
+          fi
+
+          sed -i "s|!\[$BADGE_IDENTIFIER\](.*)|![${BADGE_IDENTIFIER}]($BADGE)|" $README_FILE
+
+
+      - name: Commit and push badge update
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add $README_FILE
+          git diff --quiet || git commit -m "Update Render deploy status badge"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
